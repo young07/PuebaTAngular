@@ -1,0 +1,52 @@
+<h3>Editar Cliente</h3>
+
+<form [formGroup]="editForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <input formControlName="Nombre" type="text" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Apellido</label>
+                <input formControlName="Apellido" type="text" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Fecha Nacimiento</label>
+                <input formControlName="Fecha_Nacimiento" type="date" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Genero</label>
+                <input formControlName="Genero" type="text" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input formControlName="Email" type="email" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Contato</label>
+                <div formArrayName="Contactos">
+                    <div class="col-md-8" >
+                        <input  formControlName="Numero" type="number" class="form-control" placeholder="Número" required>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-primary" (click)="addItem(4321)">Add</button>
+                    </div>
+                </div>
+                <div class="row" *ngFor="let item of editForm.get('Contactos')['controls']; let i = index;">
+                    <div [formGroupName]="i">
+                        <div class="col-md-8" >
+                            <input  formControlName="Numero" type="number" class="form-control" placeholder="Número" required>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-danger">Remove</button>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        <button [disabled]="!editForm.valid" type="submit" class="btn btn-success">Guardar</button>
+
+</form>

@@ -1,0 +1,47 @@
+<h3>Crear Cliente</h3>
+
+<form [formGroup]="clienteForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <input formControlName="Nombre" type="text" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Apellido</label>
+                <input formControlName="Apellido" type="text" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Fecha Nacimiento</label>
+                <input formControlName="Fecha_Nacimiento" type="date" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Genero</label>
+                <input formControlName="Genero" type="text" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input formControlName="Email" type="email" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Contato</label>
+                <div formArrayName="Contactos">
+                <div class="row" *ngFor="let value of clienteForm.get('Contactos')['controls']; let i = index">
+                    <div [formGroupName]="i">
+                        <div class="col-md-8" >
+                            <input type="text" formControlName="numero" class="form-control">
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-danger" (click)="removevalue(i)">Remove</button>
+                        </div>
+                    </div>
+                 </div>
+                 <button type="button" class="btn btn-primary" (click)="addItem()">Agregar</button>
+                </div>
+            </div>
+        <button [disabled]="!clienteForm.valid" type="submit" class="btn btn-success">Guardar</button>
+
+</form>
